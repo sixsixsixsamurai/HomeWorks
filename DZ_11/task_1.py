@@ -1,50 +1,23 @@
-a = input("Введите количество файлов: ")
-set_conf_user = {}
-q = 0
-
-
-while int(a) > q:
-    z = input("Введите имя файла: ")
-    x = input(f"Введите допустимые операции с {z} файлом: ").upper()
-    set_conf_user[z] = x
-    q += 1
-
-input_score = input("Введите количество запросов к файлам: ")
-q = 0
-user_conf = {}
+n = int(input("Введите количество файлов: "))
 result = []
-
-
-while int(input_score) > q:
-    input_get_name = input(f"К какому файлу будет запрос? ")
-    input_get_value = input(f"Вид операции к {input_get_name} файлу? ").lower()
-
-
-    if input_get_name in set_conf_user.keys():
-        if input_get_value == "read":
-            for i in set_conf_user.keys():
-                if input_get_name == i:
-                    if "R" in set_conf_user.get(i):
-                        result.append("OK")
-                    else:
-                        result.append("Access denied")
-        elif input_get_value == "write":
-            for i in set_conf_user.keys():
-                if input_get_name == i:
-                    if "W" in set_conf_user.get(i):
-                        result.append("OK")
-                    else:
-                        result.append("Access denied")
-        elif input_get_value == "execute":
-            for i in set_conf_user.keys():
-                if input_get_name == i:
-                    if "X" in set_conf_user.get(i):
-                        result.append("OK")
-                    else:
-                        result.append("Access denied")
+files = {}
+for i in range(n):
+    file, *option = input("Введите имя файла который хотите создать и операции допустимые к этому файлу: ").split()
+    files[file] = set(option)
+print(files)
+m = int(input("Введите количество операций: "))
+for i in range(m):
+    op, file = input("Введите операцию которую хотите произвести и название файла к которому будет применена операция: ").split()
+    if op == "read":
+        op = "R"
+    elif op == "write":
+        op = "W"
+    elif op == "execute":
+        op = "X"
+    if op in files[file]:
+        result.append("OK")
     else:
-        print(f"{input_get_name} <-- такого файла не существует")
-    q += 1
+       result.append("Access denied")
 
 for i in result:
     print(i)
