@@ -1,15 +1,29 @@
 def cache_decorator(func):
-    cache = {}
+    cache_triangle = {}
+    cache_circle = {}
 
-    def cache_dict(*args, **kwargs):
-        key = (args, tuple(sorted(kwargs.items())))
+    if func.__name__ == "triangle_area":
+        def cache_dict(*args, **kwargs):
+            key = (args, tuple(sorted(kwargs.items())))
 
-        if key not in cache:
-            cache[key] = func(*args, **kwargs)
+            if key not in cache_triangle:
+                cache_triangle[key] = func(*args, **kwargs)
 
-        return cache[key]
+            return cache_triangle[key]
 
-    return cache_dict
+        return cache_dict
+
+
+    if func.__name__ == "circle_area":
+        def cache_dict(*args, **kwargs):
+            key = (args, tuple(sorted(kwargs.items())))
+
+            if key not in cache_circle:
+                cache_circle[key] = func(*args, **kwargs)
+
+            return cache_circle[key]
+
+        return cache_dict
 
 
 @cache_decorator
