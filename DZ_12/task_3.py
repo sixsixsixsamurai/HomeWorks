@@ -1,19 +1,7 @@
-def sum_range(start: int, end: int):
-    if start < end:
-        a = start
-        result = 0
-        result += a
-        while a < end:
-            a += 1
-            result += a
-    elif start > end:
-        a = end
-        result = 0
-        result += a
-        while a < start:
-            a += 1
-            result += a
-    return result
+def sum_range(start, end):
+    if start > end:
+        start, end = end, start
+    return sum(range(start, end + 1))
 
 
-print(sum_range(15, 20))
+print(sum_range(20, 30))
